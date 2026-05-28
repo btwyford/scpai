@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sapphire Coast Pickleball Association</title>
+<style>
+:root {
+  --cyan:#2ECFD4; --cyan-dark:#19A8AE; --cyan-light:#E6F8F9;
+  --dark:#1C1C1E; --dark2:#2A2A2C;
+  --coral:#FF6040; --coral-dark:#E04E30;
+  --grey:#444; --light:#F5F9FA; --white:#fff; --border:#ddd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--grey);background:var(--white)}
+a{color:var(--cyan-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{font-weight:700}
+
+/* NAV */
+nav{background:var(--dark);padding:0 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.nav-logo{font-size:1rem;font-weight:700;color:#fff;padding:16px 0;letter-spacing:.3px;white-space:nowrap}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+.nav-links button{background:none;border:none;color:rgba(255,255,255,.82);font-size:.82rem;padding:7px 11px;cursor:pointer;border-radius:4px;transition:all .2s;font-family:inherit;white-space:nowrap}
+.nav-links button:hover,.nav-links button.active{background:rgba(255,255,255,.15);color:#fff}
+.nav-sep{width:1px;height:20px;background:rgba(255,255,255,.2);margin:0 4px}
+.nav-book{background:var(--coral)!important;color:#fff!important;font-weight:700!important;margin-left:8px;border-radius:4px;padding:8px 16px!important}
+.nav-book:hover{background:var(--coral-dark)!important}
+
+/* PAGES */
+.page{display:none}.page.active{display:block}
+
+/* PREVIEW BANNER */
+.preview-banner{background:var(--dark);padding:9px 20px;text-align:center;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.7);border-bottom:2px solid var(--cyan)}
+
+/* BUTTONS */
+.btn{display:inline-block;padding:13px 28px;border-radius:4px;font-size:.95rem;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .2s;text-decoration:none;font-family:inherit}
+.btn-primary{background:var(--coral);color:#fff;border-color:var(--coral)}
+.btn-primary:hover{background:var(--coral-dark);border-color:var(--coral-dark);text-decoration:none}
+.btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,.1);text-decoration:none}
+.btn-teal{background:var(--cyan);color:var(--dark);border-color:var(--cyan)}
+.btn-teal:hover{background:var(--cyan-dark);text-decoration:none}
+.btn-outline{background:transparent;color:var(--cyan);border-color:var(--cyan)}
+.btn-outline:hover{background:var(--cyan);color:var(--dark);text-decoration:none}
+.btn-sm{padding:9px 18px;font-size:.85rem}
+.btn-block{width:100%;text-align:center;display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 60%,#111 100%);padding:80px 40px 72px;text-align:center}
+.hero-content{max-width:760px;margin:0 auto}
+.hero h1{font-size:2.8rem;color:#fff;font-weight:800;line-height:1.15;margin-bottom:18px}
+.hero h1 span{color:var(--cyan)}
+.hero p{font-size:1.1rem;color:rgba(255,255,255,.88);line-height:1.7;margin-bottom:32px}
+.btn-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* START HERE BANNER */
+.start-here{background:var(--cyan);padding:0}
+.start-here-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:20px 32px}
+.start-here-badge{background:var(--dark);color:#fff;font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;padding:6px 14px;border-radius:20px;white-space:nowrap}
+.start-here p{font-size:.95rem;color:var(--dark);font-weight:500;line-height:1.5}
+.start-here p strong{font-weight:700}
+
+/* STATS BAR */
+.stats-bar{background:var(--dark);display:flex;justify-content:center;flex-wrap:wrap}
+.stat{padding:16px 28px;text-align:center;border-right:1px solid rgba(255,255,255,.15)}
+.stat:last-child{border-right:none}
+.stat-num{font-size:1.4rem;font-weight:800;color:var(--cyan);display:block}
+.stat-label{font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.8px}
+
+/* SECTIONS */
+section{padding:64px 40px}
+.section-inner{max-width:1080px;margin:0 auto}
+.section-alt{background:var(--light)}
+section h2{font-size:1.75rem;color:var(--dark);font-weight:800;margin-bottom:14px;padding-bottom:10px;border-bottom:3px solid var(--cyan);display:inline-block}
+section h3{font-size:1.15rem;color:var(--grey);font-weight:700;margin-bottom:8px;margin-top:20px}
+section p{line-height:1.75;margin-bottom:12px;font-size:.97rem}
+.centered{text-align:center}
+.centered h2{display:block;border-bottom:none;padding-bottom:0}
+.centered h2::after{content:'';display:block;width:56px;height:3px;background:var(--cyan);margin:10px auto 0}
+
+/* FEATURES */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.feature{text-align:center;padding:28px 20px;background:#fff;border-radius:8px;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+.feature-icon{font-size:2.5rem;margin-bottom:12px}
+.feature h3{color:var(--cyan-dark);font-size:1.05rem;margin-top:0;margin-bottom:8px}
+.feature p{font-size:.9rem;color:#666;margin:0}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.placeholder-img{width:100%;border-radius:8px;background:linear-gradient(135deg,var(--dark),var(--dark2));aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.9rem;text-align:center;padding:20px}
+
+/* VENUE CARDS */
+.venue-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.venue-card{background:#fff;border-radius:8px;box-shadow:0 2px 20px rgba(0,0,0,.09);overflow:hidden;display:flex;flex-direction:column}
+.venue-card-header{background:var(--dark);padding:18px 22px}
+.venue-card-header h3{color:#fff;font-size:1.1rem;margin:0}
+.venue-card-header p{color:rgba(255,255,255,.78);font-size:.82rem;margin:4px 0 0}
+.venue-card-body{padding:18px 22px;flex:1}
+.venue-meta{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}
+.vm-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.4px;color:#999;min-width:60px;padding-top:2px}
+.vm-value{font-size:.88rem;color:var(--grey);line-height:1.5}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.72rem;font-weight:600}
+.tag-indoor{background:var(--cyan-light);color:var(--cyan-dark)}
+.tag-outdoor{background:#fff8e0;color:#8a6a00}
+.venue-card-footer{padding:14px 22px;border-top:1px solid var(--border)}
+
+/* FEES TABLE */
+.fees-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.fee-card{background:#fff;border-radius:8px;padding:28px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.07);border-top:4px solid var(--border)}
+.fee-card.featured{border-top-color:var(--cyan)}
+.fee-amount{font-size:2.8rem;font-weight:800;color:var(--cyan-dark);line-height:1}
+.fee-per{font-size:.85rem;color:#888;margin-bottom:12px}
+.fee-label{font-size:1rem;font-weight:700;color:var(--grey);margin-bottom:4px}
+.fee-desc{font-size:.85rem;color:#777;margin-bottom:16px;line-height:1.5}
+.fee-includes{text-align:left;padding:0;list-style:none}
+.fee-includes li{font-size:.85rem;color:#555;padding:4px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:8px}
+.fee-includes li::before{content:'✓';color:var(--cyan-dark);font-weight:700;flex-shrink:0}
+
+/* TESTIMONIALS */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.testimonial{background:#fff;border-radius:8px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);border-left:4px solid var(--cyan)}
+.testimonial p{font-style:italic;color:#555;line-height:1.7;margin-bottom:12px;font-size:.93rem}
+.testimonial cite{font-style:normal;font-weight:700;font-size:.85rem;color:var(--cyan-dark)}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.step{text-align:center;padding:32px 24px;background:#fff;border-radius:8px;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+.step-num{width:48px;height:48px;background:var(--cyan);color:var(--dark);border-radius:50%;font-size:1.3rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.step h3{color:var(--dark);margin-top:0}
+.step p{font-size:.9rem;color:#666}
+.step .btn{margin-top:14px;font-size:.85rem;padding:9px 18px}
+
+/* BENEFITS */
+.benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+.benefit{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;background:#fff;border-radius:6px;box-shadow:0 1px 8px rgba(0,0,0,.06)}
+.benefit-icon{font-size:1.3rem;flex-shrink:0}
+.benefit-text h4{font-size:.9rem;font-weight:700;color:var(--cyan-dark);margin-bottom:3px}
+.benefit-text p{font-size:.83rem;color:#666;margin:0;line-height:1.5}
+
+/* CALLOUT */
+.callout{background:var(--cyan-light);border-left:5px solid var(--cyan);border-radius:0 8px 8px 0;padding:24px 28px;margin:24px 0}
+.callout h3{color:var(--cyan-dark);margin-top:0;margin-bottom:8px}
+.callout p{margin-bottom:12px}
+.callout p:last-child{margin-bottom:0}
+
+/* START HERE PAGE SECTION */
+.start-here-section{background:linear-gradient(135deg,var(--dark),var(--dark2));padding:56px 40px}
+.start-here-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:28px 32px}
+.start-here-card h3{color:var(--cyan);margin-top:0;font-size:1.2rem;margin-bottom:16px}
+.info-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.info-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px}
+.info-text strong{display:block;color:#fff;font-size:.93rem;margin-bottom:2px}
+.info-text span{color:rgba(255,255,255,.72);font-size:.86rem;line-height:1.5}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(135deg,var(--dark),var(--dark2));padding:60px 40px;text-align:center}
+.page-hero h1{font-size:2.2rem;color:#fff;font-weight:800;margin-bottom:10px}
+.page-hero p{color:rgba(255,255,255,.85);font-size:1rem;max-width:600px;margin:0 auto 24px;line-height:1.65}
+
+/* COMMITTEE */
+.committee-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.committee-card{background:#fff;border-radius:8px;padding:24px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+.committee-avatar{width:72px;height:72px;background:var(--cyan);border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:var(--dark)}
+.committee-card h3{font-size:.95rem;color:var(--grey);margin:0 0 4px}
+.committee-role{font-size:.8rem;color:var(--cyan-dark);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+
+/* DOCUMENTS */
+.doc-category{margin-bottom:40px}
+.doc-category h3{font-size:1.1rem;color:var(--dark);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--cyan-light)}
+.doc-list{display:flex;flex-direction:column;gap:8px}
+.doc-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border-radius:6px;border:1px solid var(--border);transition:box-shadow .2s}
+.doc-item:hover{box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.doc-icon{font-size:1.4rem;flex-shrink:0}
+.doc-info{flex:1}
+.doc-info strong{display:block;font-size:.93rem;color:var(--grey)}
+.doc-info span{font-size:.8rem;color:#888}
+.doc-badge{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--cyan-light);color:var(--cyan-dark)}
+
+/* NEWSLETTER */
+.newsletter{background:var(--dark);padding:52px 40px;text-align:center}
+.newsletter h2{color:#fff;font-size:1.7rem;border-bottom:none;display:block;margin-bottom:8px}
+.newsletter h2::after{display:none}
+.newsletter p{color:rgba(255,255,255,.8);margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto}
+.newsletter-form{display:flex;gap:10px;max-width:400px;margin:0 auto}
+.newsletter-form input{flex:1;padding:12px 16px;border:none;border-radius:4px;font-size:.93rem}
+.newsletter-form button{padding:12px 22px;background:var(--coral);color:#fff;border:none;border-radius:4px;font-weight:700;cursor:pointer}
+
+/* FOOTER */
+footer{background:#1a1a1a;color:rgba(255,255,255,.6);padding:44px 40px 28px}
+.footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+footer h4{color:#fff;font-size:.82rem;text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px}
+footer p,footer a{font-size:.83rem;line-height:1.8;color:rgba(255,255,255,.5)}
+footer a:hover{color:var(--cyan)}
+.footer-bottom{max-width:1080px;margin:28px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);text-align:center;font-size:.76rem;color:rgba(255,255,255,.3)}
+
+@media(max-width:768px){
+  .features,.venue-cards,.testimonials,.steps,.benefits,.fees-grid,.committee-grid,.two-col,.footer-inner{grid-template-columns:1fr}
+  .hero h1{font-size:1.9rem}.stats-bar{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.15)}
+  nav{padding:0 12px}.nav-logo{font-size:.85rem}
+  .nav-links button{font-size:.75rem;padding:5px 8px}
+  .start-here-inner{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="preview-banner">HTML Preview — Sapphire Coast Pickleball Association · 6 pages · Open links go to live OpenSports</div>
+
+<nav>
+  <div class="nav-logo"><img src="logo.jpg" alt="Sapphire Coast Pickleball" style="height:44px;width:44px;object-fit:contain;vertical-align:middle;margin-right:10px;border-radius:50%;">Sapphire Coast <span>Pickleball</span></div>
+  <div class="nav-links">
+    <button onclick="show('home')" id="btn-home" class="active">Home</button>
+    <button onclick="show('sessions')" id="btn-sessions">Find a Session</button>
+    <button onclick="show('about')" id="btn-about">Our Story</button>
+    <button onclick="show('join')" id="btn-join">Join</button>
+    <div class="nav-sep"></div>
+    <button onclick="show('committee')" id="btn-committee">Committee</button>
+    <button onclick="show('documents')" id="btn-documents">Documents</button>
+    <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn nav-book">Book Now</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════ HOME PAGE ══════════════════════ -->
+<div id="page-home" class="page active">
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Pickleball on the <span>Sapphire Coast</span></h1>
+    <p>Join one of the fastest-growing sports in the world — right here in our backyard.<br>
+    All equipment provided. <strong style="color:var(--cyan);">Beginners welcome.</strong> Just turn up.</p>
+    <div class="btn-group">
+      <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary">📅 Book a Session</a>
+      <a href="#" onclick="show('join');return false;" class="btn btn-secondary">Become a Member</a>
+    </div>
+  </div>
+</div>
+
+<!-- START HERE BANNER -->
+<div class="start-here">
+  <div class="start-here-inner">
+    <div class="start-here-badge">⭐ Start Here</div>
+    <p><strong>New to pickleball?</strong> We run sessions in Bermagui, Pambula &amp; Bega · $10 members / $12 visitors · All equipment provided · 18+ · No experience needed</p>
+    <a href="#" onclick="show('sessions');return false;" class="btn btn-teal btn-sm">See Sessions →</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">3</span><span class="stat-label">Venues</span></div>
+  <div class="stat"><span class="stat-num">$10</span><span class="stat-label">Members / session</span></div>
+  <div class="stat"><span class="stat-num">$12</span><span class="stat-label">Visitors / session</span></div>
+  <div class="stat"><span class="stat-num">2 hrs</span><span class="stat-label">of Play</span></div>
+  <div class="stat"><span class="stat-num">All</span><span class="stat-label">Equipment Provided</span></div>
+</div>
+
+<!-- NEW VISITOR — START HERE SECTION -->
+<div class="start-here-section">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:36px;">
+      <h2 style="color:#fff;border:none;display:inline-block;">Everything You Need to Know to Get Started</h2>
+      <div style="width:56px;height:3px;background:var(--gold);margin:10px auto 12px;"></div>
+      <p style="color:rgba(255,255,255,.8);max-width:560px;margin:0 auto;">New to pickleball or new to the Sapphire Coast? Here's everything in one place.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      <div class="start-here-card">
+        <h3>📍 Where We Play</h3>
+        <div class="info-row">
+          <div class="info-icon">🏟️</div>
+          <div class="info-text"><strong>Bermagui Indoor Stadium</strong><span>20 Bunga Street, Bermagui</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🌤️</div>
+          <div class="info-text"><strong>Pambula Sports Complex</strong><span>Pambula Beach Road, Pambula</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🏟️</div>
+          <div class="info-text"><strong>SCAC Gymnasium, Bega</strong><span>2 Max Slater Drive, Bega</span></div>
+        </div>
+      </div>
+      <div class="start-here-card">
+        <h3>🕐 When We Play</h3>
+        <div class="info-row">
+          <div class="info-icon">📅</div>
+          <div class="info-text"><strong>Sessions vary by venue</strong><span>Check OpenSports for the current schedule at each venue — times do change seasonally.</span></div>
+        </div>
+        <div style="margin-top:16px;">
+          <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary btn-sm" style="width:100%;text-align:center;display:block;">View Full Schedule →</a>
+        </div>
+      </div>
+      <div class="start-here-card">
+        <h3>🚀 How to Get Started</h3>
+        <div class="info-row">
+          <div class="info-icon">1️⃣</div>
+          <div class="info-text"><strong>Book a session</strong><span>Free to sign up on OpenSports — book your spot in a few clicks.</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">2️⃣</div>
+          <div class="info-text"><strong>Turn up &amp; play</strong><span>We provide all equipment. Just bring comfortable shoes.</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">3️⃣</div>
+          <div class="info-text"><strong>Try 3 sessions free of commitment</strong><span>After 3 sessions, join as a member for unlimited access at $10/session.</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary">Book Your First Session Now →</a>
+    </div>
+  </div>
+</div>
+
+<!-- WHY PICKLEBALL -->
+<section class="section-alt">
+  <div class="section-inner centered">
+    <h2>Why Pickleball?</h2>
+    <p style="color:#666;max-width:520px;margin:12px auto 0;">Whether you've never held a paddle or you're a seasoned player — there's a place for you here.</p>
+    <div class="features">
+      <div class="feature"><div class="feature-icon">🏓</div><h3>Easy to Learn</h3><p>Pick up the basics in minutes. No experience needed — we provide all gear.</p></div>
+      <div class="feature"><div class="feature-icon">👥</div><h3>Social &amp; Fun</h3><p>Meet your neighbours, make new friends, and share a laugh across the net.</p></div>
+      <div class="feature"><div class="feature-icon">💪</div><h3>Great for Every Age</h3><p>Low-impact and high-enjoyment. Perfect whether you're 25 or 75.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIONS & PRICING -->
+<section>
+  <div class="section-inner">
+    <div class="two-col" style="align-items:start;gap:40px;">
+      <div>
+        <h2>Sessions &amp; Pricing</h2>
+        <p>All sessions run for <strong>two hours</strong> and equipment is provided. Just show up — we'll look after you.</p>
+        <div class="fees-grid" style="grid-template-columns:1fr 1fr;margin-top:20px;">
+          <div class="fee-card featured">
+            <div class="fee-amount">$10</div>
+            <div class="fee-per">per session</div>
+            <div class="fee-label">Members</div>
+            <div class="fee-desc">For registered SCPAI &amp; PANSW members</div>
+            <ul class="fee-includes">
+              <li>2 hours of play</li>
+              <li>All equipment provided</li>
+              <li>All 3 venues</li>
+              <li>PAA insurance cover</li>
+            </ul>
+            <a href="#" onclick="show('join');return false;" class="btn btn-teal btn-sm" style="margin-top:14px;display:block;text-align:center;">Become a Member</a>
+          </div>
+          <div class="fee-card">
+            <div class="fee-amount" style="color:#888;">$12</div>
+            <div class="fee-per">per session</div>
+            <div class="fee-label">Visitors &amp; Casual</div>
+            <div class="fee-desc">First 3 visits — no membership required</div>
+            <ul class="fee-includes">
+              <li>2 hours of play</li>
+              <li>All equipment provided</li>
+              <li>Try before you join</li>
+              <li>18 years and over</li>
+            </ul>
+            <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-outline btn-sm" style="margin-top:14px;display:block;text-align:center;">Book a Session</a>
+          </div>
+        </div>
+        <p style="font-size:.8rem;color:#999;margin-top:10px;">⚠️ Update $12 visitor fee if different — check with committee</p>
+      </div>
+      <div>
+        <h2 style="margin-bottom:16px;">Our Venues</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Bermagui" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--light);border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--grey);">
+            <span style="font-size:1.4rem;">🏟️</span>
+            <div style="flex:1;"><strong style="display:block;color:var(--cyan-dark);">Bermagui</strong><span style="font-size:.83rem;">Indoor · 20 Bunga Street</span></div>
+            <span class="tag tag-indoor">Book →</span>
+          </a>
+          <a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Pambula" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--light);border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--grey);">
+            <span style="font-size:1.4rem;">🌤️</span>
+            <div style="flex:1;"><strong style="display:block;color:var(--cyan-dark);">Pambula</strong><span style="font-size:.83rem;">Outdoor · Pambula Beach Road</span></div>
+            <span class="tag tag-outdoor">Book →</span>
+          </a>
+          <a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Bega" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--light);border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--grey);">
+            <span style="font-size:1.4rem;">🏟️</span>
+            <div style="flex:1;"><strong style="display:block;color:var(--cyan-dark);">Bega</strong><span style="font-size:.83rem;">Indoor · SCAC Gymnasium</span></div>
+            <span class="tag tag-indoor">Book →</span>
+          </a>
+        </div>
+        <div style="margin-top:16px;"><a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-teal" style="width:100%;text-align:center;display:block;">View Full Schedule on OpenSports →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-alt">
+  <div class="section-inner centered">
+    <h2>What Our Members Say</h2>
+    <div class="testimonials">
+      <div class="testimonial"><p>"I had never played before and was welcomed with open arms. Now I play twice a week!"</p><cite>— Sandra, Bermagui</cite></div>
+      <div class="testimonial"><p>"The best $10 I spend every week. Great exercise and even better company."</p><cite>— Mike, Pambula</cite></div>
+      <div class="testimonial"><p>"I was nervous at first, but everyone was so encouraging. I was hooked after one session."</p><cite>— Jenny, Bega</cite></div>
+    </div>
+    <p style="color:#bbb;font-size:.78rem;margin-top:16px;">✏️ Replace with real quotes from your members</p>
+  </div>
+</section>
+
+<div class="newsletter">
+  <h2>Stay in the Loop</h2>
+  <p>Session updates, club news, and tips — no spam, just pickleball.</p>
+  <div class="newsletter-form"><input type="email" placeholder="Your email address"><button>Sign Up</button></div>
+</div>
+</div><!-- /home -->
+
+<!-- ══════════════════════ SESSIONS PAGE ══════════════════════ -->
+<div id="page-sessions" class="page">
+<div class="page-hero">
+  <h1>Find a Session</h1>
+  <p>Three venues across the Sapphire Coast · $10 members / $12 visitors · All equipment provided · 18+ · <strong style="color:var(--gold);">Beginners welcome</strong></p>
+  <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary">View All Sessions &amp; Book Online</a>
+</div>
+
+<section class="section-alt">
+  <div class="section-inner centered">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Find a Session</h3><p>Browse sessions at your nearest venue and pick a time that suits.</p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-outline">View All Sessions</a></div>
+      <div class="step"><div class="step-num">2</div><h3>Book Your Spot</h3><p>Book on OpenSports — free to join our group, takes one minute.</p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-outline">Book Now</a></div>
+      <div class="step"><div class="step-num">3</div><h3>Turn Up &amp; Play</h3><p>We provide paddles and balls. Bring comfortable shoes and a smile.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <h2>Session Fees</h2>
+    <p>We keep sessions affordable for everyone.</p>
+    <div class="fees-grid" style="max-width:600px;margin-top:20px;">
+      <div class="fee-card featured">
+        <div class="fee-amount">$10</div><div class="fee-per">per session</div>
+        <div class="fee-label">Members</div>
+        <div class="fee-desc">Registered SCPAI + PANSW members</div>
+        <ul class="fee-includes"><li>2 hrs play</li><li>All 3 venues</li><li>PAA insurance</li></ul>
+        <a href="#" onclick="show('join');return false;" class="btn btn-teal btn-sm" style="margin-top:12px;display:block;text-align:center;">Join Now</a>
+      </div>
+      <div class="fee-card">
+        <div class="fee-amount" style="color:#888;">$12</div><div class="fee-per">per session</div>
+        <div class="fee-label">Visitors &amp; Casual</div>
+        <div class="fee-desc">First 3 sessions — no membership needed</div>
+        <ul class="fee-includes"><li>2 hrs play</li><li>Equipment included</li><li>Try before you join</li></ul>
+        <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-outline btn-sm" style="margin-top:12px;display:block;text-align:center;">Book a Session</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="section-inner">
+    <h2>Venues</h2>
+    <p>Click a venue to see its upcoming sessions on OpenSports.</p>
+
+    <div style="background:#fff;border-radius:10px;overflow:hidden;margin-top:28px;box-shadow:0 2px 16px rgba(0,0,0,.08);">
+      <div style="background:var(--dark);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div><h3 style="color:#fff;margin:0;font-size:1.2rem;">Bermagui Indoor Stadium</h3><p style="color:rgba(255,255,255,.78);margin:3px 0 0;font-size:.85rem;">20 Bunga Street, Bermagui NSW 2546</p></div>
+        <a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Bermagui" target="_blank" class="btn btn-primary btn-sm">Book at Bermagui →</a>
+      </div>
+      <div style="padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;letter-spacing:.4px;">Type</span><p style="margin-top:4px;"><span class="tag tag-indoor">Indoors</span></p></div>
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;letter-spacing:.4px;">Parking</span><p style="margin-top:4px;color:#888;font-style:italic;font-size:.88rem;">Add parking details here</p></div>
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;letter-spacing:.4px;">Sessions</span><p style="margin-top:4px;color:#888;font-style:italic;font-size:.88rem;">Check OpenSports for current days &amp; times</p></div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;overflow:hidden;margin-top:20px;box-shadow:0 2px 16px rgba(0,0,0,.08);">
+      <div style="background:var(--dark);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div><h3 style="color:#fff;margin:0;font-size:1.2rem;">Pambula Sports Complex</h3><p style="color:rgba(255,255,255,.78);margin:3px 0 0;font-size:.85rem;">Pambula Beach Road, Pambula NSW 2549</p></div>
+        <a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Pambula" target="_blank" class="btn btn-primary btn-sm">Book at Pambula →</a>
+      </div>
+      <div style="padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;">Type</span><p style="margin-top:4px;"><span class="tag tag-outdoor">Outdoors</span></p></div>
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;">Note</span><p style="margin-top:4px;color:#888;font-size:.88rem;">Weather-dependent. Check before attending.</p></div>
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;">Sessions</span><p style="margin-top:4px;color:#888;font-style:italic;font-size:.88rem;">Check OpenSports for current days &amp; times</p></div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;overflow:hidden;margin-top:20px;box-shadow:0 2px 16px rgba(0,0,0,.08);">
+      <div style="background:var(--dark);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div><h3 style="color:#fff;margin:0;font-size:1.2rem;">Sapphire Coast Anglican College Gymnasium</h3><p style="color:rgba(255,255,255,.78);margin:3px 0 0;font-size:.85rem;">2 Max Slater Drive, Bega NSW 2550</p></div>
+        <a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Bega" target="_blank" class="btn btn-primary btn-sm">Book at Bega →</a>
+      </div>
+      <div style="padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;">Type</span><p style="margin-top:4px;"><span class="tag tag-indoor">Indoors</span></p></div>
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;">Parking</span><p style="margin-top:4px;font-size:.88rem;">Follow the yellow route to the car park, then walk down to the gymnasium.</p></div>
+        <div><span style="font-size:.72rem;text-transform:uppercase;color:#999;">Sessions</span><p style="margin-top:4px;color:#888;font-style:italic;font-size:.88rem;">Check OpenSports for current days &amp; times</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--dark);">
+  <div class="section-inner two-col">
+    <div>
+      <h2 style="color:#fff;border-color:rgba(255,255,255,.35);">Visiting the Sapphire Coast?</h2>
+      <p style="color:rgba(255,255,255,.88);">Travellers and holidaymakers are very welcome — no membership required for your first three visits.</p>
+      <p style="color:rgba(255,255,255,.88);">Just book online and show up. We'll look after you. Visitor fee: <strong style="color:var(--gold);">$12 per session.</strong></p>
+      <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary" style="margin-top:8px;">Book a Session →</a>
+    </div>
+    <div style="color:rgba(255,255,255,.6);text-align:center;padding:36px;border:2px dashed rgba(255,255,255,.25);border-radius:8px;">
+      <p style="font-size:2rem;margin-bottom:10px;">🏖️</p>
+      <p style="color:rgba(255,255,255,.65);">Holiday on the coast?<br>Come join a game.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="section-inner centered">
+    <div class="callout" style="max-width:640px;margin:0 auto;text-align:left;">
+      <h3>Ready to commit?</h3>
+      <p>After your third session, join as a member. You'll pay <strong>$10 per session</strong> (instead of $12) and get unlimited access to all three venues.</p>
+      <a href="#" onclick="show('join');return false;" class="btn btn-teal">How to Become a Member →</a>
+    </div>
+  </div>
+</section>
+</div><!-- /sessions -->
+
+<!-- ══════════════════════ ABOUT PAGE ══════════════════════ -->
+<div id="page-about" class="page">
+<div class="page-hero">
+  <h1>Bringing People Together Through the Joy of Pickleball</h1>
+  <p>A volunteer-run, not-for-profit association on the NSW Sapphire Coast.</p>
+</div>
+<section class="section-alt"><div class="section-inner centered">
+  <h2>Our Mission</h2>
+  <p style="max-width:640px;margin:14px auto 0;font-size:1.02rem;line-height:1.8;color:#555;">At Sapphire Coast Pickleball Association Inc (SCPAI), our mission is simple: <strong>more courts, more players, more smiles.</strong></p>
+  <p style="max-width:640px;margin:12px auto 0;color:#666;line-height:1.8;">We believe pickleball is one of the best ways to stay active, meet people, and be part of a vibrant community — and we want as many people as possible on the Sapphire Coast to experience that.</p>
+</div></section>
+<section><div class="section-inner two-col">
+  <div>
+    <h2>Who We Are</h2>
+    <p>We are a group of volunteers who love pickleball and love the Sapphire Coast.</p>
+    <p>SCPAI is a not-for-profit association that runs pickleball venues from Bermagui to Pambula. Our sessions are social, supportive, and a lot of fun — everyone from beginners to experienced players is welcome.</p>
+    <p>Whether you're a retiree looking for low-impact exercise, a competitive player wanting a challenge, or someone who just wants to try something new — <strong>you belong here.</strong></p>
+    <div style="background:#fff8e0;border-left:4px solid var(--gold);border-radius:0 6px 6px 0;padding:12px 16px;margin-top:14px;font-size:.88rem;color:#7a5e00;">
+      <strong>Beginners welcome!</strong> We provide all equipment and our members love showing newcomers the ropes. Sessions are currently open to players 18 years and over.
+    </div>
+  </div>
+  <div class="placeholder-img">📷 Add a group photo of your members or committee here</div>
+</div></section>
+<section style="background:var(--dark);"><div class="section-inner two-col">
+  <div class="placeholder-img" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);">📷 Action photo from a session</div>
+  <div>
+    <h2 style="color:#fff;border-color:rgba(255,255,255,.35);">Our Community</h2>
+    <p style="color:rgba(255,255,255,.88);">Pickleball brings people together across generations and fitness levels. The smaller court and lighter equipment make it accessible to almost everyone.</p>
+    <p style="color:rgba(255,255,255,.88);">We've seen friendships form, fitness improve, and a real sense of community grow across all three of our venues. Come and be part of it.</p>
+    <a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary" style="margin-top:10px;">Join a Session →</a>
+  </div>
+</div></section>
+<section><div class="section-inner centered">
+  <h2>Get Involved</h2>
+  <p style="max-width:520px;margin:12px auto 24px;color:#666;">We're always looking for enthusiastic volunteers to help run sessions, assist with venues, or join the committee.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="mailto:info@sapphirecoastpickleball.org.au" class="btn btn-teal">Contact Us →</a>
+    <a href="#" onclick="show('committee');return false;" class="btn btn-outline">Meet the Committee →</a>
+  </div>
+</div></section>
+</div><!-- /about -->
+
+<!-- ══════════════════════ JOIN PAGE ══════════════════════ -->
+<div id="page-join" class="page">
+<div class="page-hero">
+  <h1>Ready to Join?</h1>
+  <p>Membership gives you unlimited access to all SCPAI sessions at just $10 per session, PAA insurance cover, and a growing community right here on the Sapphire Coast.</p>
+</div>
+<section class="section-alt"><div class="section-inner">
+  <div class="centered" style="margin-bottom:28px;"><h2>What You Get as a Member</h2></div>
+  <div class="benefits">
+    <div class="benefit"><div class="benefit-icon">🎾</div><div class="benefit-text"><h4>Unlimited Sessions — $10 each</h4><p>Play as often as you like at Bermagui, Pambula and Bega (vs $12 for visitors).</p></div></div>
+    <div class="benefit"><div class="benefit-icon">🛡️</div><div class="benefit-text"><h4>PAA Insurance Cover</h4><p>Your PANSW membership includes insurance cover for every session.</p></div></div>
+    <div class="benefit"><div class="benefit-icon">👥</div><div class="benefit-text"><h4>Community &amp; Connection</h4><p>Be part of a welcoming group of players across the Sapphire Coast.</p></div></div>
+    <div class="benefit"><div class="benefit-icon">📊</div><div class="benefit-text"><h4>Graded Sessions</h4><p>Play with others at a similar skill level as you develop your game.</p></div></div>
+    <div class="benefit"><div class="benefit-icon">🎉</div><div class="benefit-text"><h4>Member-Only Events</h4><p>Access to club socials, tournaments, and special sessions.</p></div></div>
+    <div class="benefit"><div class="benefit-icon">📬</div><div class="benefit-text"><h4>Club Newsletter</h4><p>Stay in the loop with news, tips, and session updates.</p></div></div>
+    <div class="benefit"><div class="benefit-icon">🗳️</div><div class="benefit-text"><h4>Voting Rights at AGM</h4><p>Have your say at the Annual General Meeting.</p></div></div>
+    <div class="benefit"><div class="benefit-icon">❤️</div><div class="benefit-text"><h4>Support a Community Club</h4><p>Your membership helps a volunteer-run not-for-profit keep growing.</p></div></div>
+  </div>
+</div></section>
+<section><div class="section-inner centered">
+  <h2>How to Join — 3 Easy Steps</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Register with PANSW</h3><p>Register with Pickleball Association NSW — done once, gives you your PAA ID and insurance.</p><a href="https://www.pansw.com.au" target="_blank" class="btn btn-outline">Register with PANSW →</a></div>
+    <div class="step"><div class="step-num">2</div><h3>Join SCPAI</h3><p>Complete our club registration form with your PAA ID. Annual membership fee: <strong>[add fee]</strong>.</p><a href="#" class="btn btn-outline">Join SCPAI →</a></div>
+    <div class="step"><div class="step-num">3</div><h3>Book &amp; Play!</h3><p>Book your next session on OpenSports, show your member ID on arrival, and enjoy $10 sessions.</p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank" class="btn btn-primary">Book a Session →</a></div>
+  </div>
+</div></section>
+<section class="section-alt"><div class="section-inner">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div class="callout"><h3>Already a Member?</h3><p>Renewing your membership or need to update your details?</p><a href="#" class="btn btn-outline">Existing Member →</a></div>
+    <div class="callout"><h3>Not Sure of Your PAA ID?</h3><p>Your PAA member ID is needed for check-in at sessions.</p><a href="#" class="btn btn-outline">Find Your ID →</a></div>
+  </div>
+</div></section>
+<section style="background:var(--dark);"><div class="section-inner centered">
+  <h2 style="color:#fff;border-color:rgba(255,255,255,.35);">Questions?</h2>
+  <p style="color:rgba(255,255,255,.82);margin:12px auto 24px;max-width:440px;">Happy to help — get in touch and one of our volunteers will get back to you.</p>
+  <a href="mailto:info@sapphirecoastpickleball.org.au" class="btn btn-primary">Contact Us →</a>
+</div></section>
+</div><!-- /join -->
+
+<!-- ══════════════════════ COMMITTEE PAGE ══════════════════════ -->
+<div id="page-committee" class="page">
+<div class="page-hero">
+  <h1>Our Committee</h1>
+  <p>SCPAI is run entirely by volunteers who are passionate about pickleball and the Sapphire Coast community.</p>
+</div>
+<section><div class="section-inner">
+  <h2>2025–2026 Committee</h2>
+  <p>Our committee members give their time freely to keep sessions running, venues open, and the association growing. If you'd like to get involved, <a href="mailto:info@sapphirecoastpickleball.org.au">get in touch</a>.</p>
+  <div class="committee-grid">
+    <div class="committee-card">
+      <div class="committee-avatar">SR</div>
+      <h3>Shelley Rowlands</h3>
+      <div class="committee-role">President &amp; Secretary</div>
+    </div>
+    <div class="committee-card">
+      <div class="committee-avatar">BT</div>
+      <h3>Barnaby Twyford</h3>
+      <div class="committee-role">Vice President (acting)</div>
+    </div>
+    <div class="committee-card">
+      <div class="committee-avatar">KK</div>
+      <h3>Kylie Kiss</h3>
+      <div class="committee-role">Treasurer</div>
+    </div>
+    <div class="committee-card">
+      <div class="committee-avatar">PR</div>
+      <h3>Poukuy Ros</h3>
+      <div class="committee-role">Ordinary Committee Member</div>
+    </div>
+    <div class="committee-card">
+      <div class="committee-avatar">JW</div>
+      <h3>John Willington</h3>
+      <div class="committee-role">Ordinary Committee Member</div>
+    </div>
+    <div class="committee-card">
+      <div class="committee-avatar">KG</div>
+      <h3>Kathy Gavin</h3>
+      <div class="committee-role">Ordinary Committee Member</div>
+    </div>
+    <div class="committee-card">
+      <div class="committee-avatar">DK</div>
+      <h3>Deena Koellner</h3>
+      <div class="committee-role">Ordinary Committee Member</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section-alt"><div class="section-inner">
+  <div class="two-col" style="align-items:start;">
+    <div>
+      <h2>About the Committee</h2>
+      <p>The SCPAI committee meets regularly to manage venues, plan sessions, handle memberships, and grow the sport on the Sapphire Coast.</p>
+      <p>Committee positions are elected at the Annual General Meeting (AGM). All financial members of SCPAI are eligible to vote and stand for election.</p>
+      <p>We are always looking for enthusiastic members to join the committee — no experience necessary, just a love of the game and the community.</p>
+      <a href="#" onclick="show('documents');return false;" class="btn btn-outline" style="margin-top:8px;">View AGM Documents →</a>
+    </div>
+    <div>
+      <h2>Get in Touch with the Committee</h2>
+      <p>Have a question, suggestion, or want to volunteer?</p>
+      <div style="background:var(--light);border-radius:8px;padding:20px;margin-top:12px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:1.3rem;">📧</span>
+          <div><strong style="font-size:.88rem;">General enquiries</strong><br><a href="mailto:info@sapphirecoastpickleball.org.au" style="font-size:.88rem;">info@sapphirecoastpickleball.org.au</a></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:1.3rem;">👥</span>
+          <div><strong style="font-size:.88rem;">Facebook</strong><br><a href="https://www.facebook.com/profile.php?id=61564254884759" target="_blank" style="font-size:.88rem;">facebook.com/SCPAI</a></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:1.3rem;">🌐</span>
+          <div><strong style="font-size:.88rem;">Website</strong><br><a href="https://www.sapphirecoastpickleball.org.au" target="_blank" style="font-size:.88rem;">sapphirecoastpickleball.org.au</a></div>
+        </div>
+      </div>
+      <a href="mailto:info@sapphirecoastpickleball.org.au" class="btn btn-teal" style="margin-top:16px;display:block;text-align:center;">Send Us a Message →</a>
+    </div>
+  </div>
+</div></section>
+</div><!-- /committee -->
+
+<!-- ══════════════════════ DOCUMENTS PAGE ══════════════════════ -->
+<div id="page-documents" class="page">
+<div class="page-hero">
+  <h1>Documents &amp; Publications</h1>
+  <p>Official documents of the Sapphire Coast Pickleball Association Inc — available to all members.</p>
+</div>
+<section><div class="section-inner">
+  <p style="color:#666;margin-bottom:36px;">All SCPAI governance documents are published here for transparency. Financial members can access all documents. Some items may require you to be logged in as a member.</p>
+
+  <!-- AGM -->
+  <div class="doc-category">
+    <h3>📋 Annual General Meeting (AGM)</h3>
+    <div class="doc-list">
+      <div class="doc-item">
+        <span class="doc-icon">📄</span>
+        <div class="doc-info"><strong>AGM 2025 — Minutes</strong><span>Annual General Meeting minutes · October 2025</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📄</span>
+        <div class="doc-info"><strong>AGM 2025 — Agenda</strong><span>Annual General Meeting agenda · October 2025</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📊</span>
+        <div class="doc-info"><strong>AGM 2025 — Financial Report</strong><span>Annual financial statements · FY 2024–25</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📄</span>
+        <div class="doc-info"><strong>AGM 2025 — President's Report</strong><span>Annual report from the President</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSURANCE -->
+  <div class="doc-category">
+    <h3>🛡️ Insurance</h3>
+    <div class="doc-list">
+      <div class="doc-item">
+        <span class="doc-icon">📋</span>
+        <div class="doc-info"><strong>PAA Insurance Certificate of Currency</strong><span>Current insurance cover through Pickleball Australia</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📋</span>
+        <div class="doc-info"><strong>Insurance Policy Summary</strong><span>What is covered and how to make a claim</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOVERNANCE -->
+  <div class="doc-category">
+    <h3>📜 Governance &amp; Policies</h3>
+    <div class="doc-list">
+      <div class="doc-item">
+        <span class="doc-icon">📖</span>
+        <div class="doc-info"><strong>SCPAI Constitution</strong><span>The governing rules of the Sapphire Coast Pickleball Association Inc</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📖</span>
+        <div class="doc-info"><strong>Code of Conduct</strong><span>Expected behaviour for all members and participants</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📖</span>
+        <div class="doc-info"><strong>Safety &amp; Etiquette Policy</strong><span>On-court safety guidelines and etiquette standards</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📖</span>
+        <div class="doc-info"><strong>Privacy Policy</strong><span>How we collect, store and use member information</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBERSHIP -->
+  <div class="doc-category">
+    <h3>👥 Membership</h3>
+    <div class="doc-list">
+      <div class="doc-item">
+        <span class="doc-icon">📝</span>
+        <div class="doc-info"><strong>Membership Registration Form</strong><span>Join SCPAI — complete online or download and return</span></div>
+        <span class="doc-badge">Form</span>
+      </div>
+      <div class="doc-item">
+        <span class="doc-icon">📝</span>
+        <div class="doc-info"><strong>2025–26 Membership Fee Schedule</strong><span>Current annual membership fees and session rates</span></div>
+        <span class="doc-badge">PDF</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:8px;">
+    <h3>Can't find a document?</h3>
+    <p>Contact the committee and we'll help you find what you need.</p>
+    <a href="mailto:info@sapphirecoastpickleball.org.au" class="btn btn-teal btn-sm">Email the Committee →</a>
+  </div>
+  <p style="color:#bbb;font-size:.78rem;margin-top:16px;">✏️ Replace each document row with a real download link. In Squarespace, upload PDFs via Media Library and link each item to its file URL.</p>
+</div></section>
+</div><!-- /documents -->
+
+<!-- SHARED FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Sapphire Coast Pickleball Association Inc</h4>
+      <p>A volunteer-run, not-for-profit association bringing people together through pickleball on the NSW Sapphire Coast.</p>
+      <p style="margin-top:10px;"><a href="https://www.facebook.com/profile.php?id=61564254884759" target="_blank">Facebook →</a></p>
+    </div>
+    <div>
+      <h4>Venues &amp; Booking</h4>
+      <p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Bermagui" target="_blank">Book at Bermagui</a></p>
+      <p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Pambula" target="_blank">Book at Pambula</a></p>
+      <p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events?tags=Bega" target="_blank">Book at Bega</a></p>
+      <p><a href="https://opensports.net/sapphire-coast-pickleball/tab/events" target="_blank">All Sessions</a></p>
+    </div>
+    <div>
+      <h4>The Club</h4>
+      <p><a href="#" onclick="show('about');return false;">Our Story</a></p>
+      <p><a href="#" onclick="show('committee');return false;">Committee</a></p>
+      <p><a href="#" onclick="show('documents');return false;">Documents</a></p>
+      <p><a href="#" onclick="show('join');return false;">Become a Member</a></p>
+    </div>
+    <div>
+      <h4>Session Fees</h4>
+      <p><strong style="color:rgba(255,255,255,.7);">Members:</strong> $10/session</p>
+      <p><strong style="color:rgba(255,255,255,.7);">Visitors:</strong> $12/session</p>
+      <p style="margin-top:8px;"><a href="mailto:info@sapphirecoastpickleball.org.au">Contact Us</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Sapphire Coast Pickleball Association Inc &nbsp;|&nbsp; <a href="https://www.sapphirecoastpickleball.org.au" target="_blank">sapphirecoastpickleball.org.au</a></div>
+</footer>
+
+<script>
+function show(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('btn-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body></html>
